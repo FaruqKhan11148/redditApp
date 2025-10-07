@@ -4,12 +4,15 @@ import cors from "cors";
 
 const app = express();
 app.use(cors());
+
 const PORT = process.env.PORT || 5000;
 
 app.get("/reddit", async (req, res) => {
   try {
     const redditRes = await fetch("https://www.reddit.com/r/reactjs.json", {
-      headers: { "User-Agent": "reddit-viewer-app/0.1" }
+      headers: {
+        "User-Agent": "Mozilla/5.0 (compatible; RedditViewer/1.0)"
+      }
     });
 
     if (!redditRes.ok) {
