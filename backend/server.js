@@ -9,23 +9,22 @@ const PORT = process.env.PORT || 5000;
 
 app.get('/reddit', async (req, res) => {
   try {
+    // Use AllOrigins proxy to avoid 403
     const redditRes = await fetch(
       'https://api.allorigins.win/get?url=' +
         encodeURIComponent('https://www.reddit.com/r/reactjs.json')
     );
 
-    const textData = await redditRes.json();
-    const data = JSON.parse(textData.contents);
-    res.json(data);
-
     if (!redditRes.ok) {
       throw new Error(`Reddit fetch failed with status: ${redditRes.status}`);
     }
 
-    const data = await redditRes.json();
+    const textData = await redditRes.json();
+    const data = JSON.parse(textData.contents);
+
     res.json(data);
   } catch (err) {
-    console.error(err);
+    console.error('Reddit fetch error:', err.message);
     res.status(500).json({ error: 'Failed to fetch Reddit posts' });
   }
 });
