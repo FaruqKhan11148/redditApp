@@ -1,24 +1,29 @@
 import express from "express";
-import cors from "cors";
 import fetch from "node-fetch";
+import cors from "cors";
 
 const app = express();
-const PORT = 5000;
-
 app.use(cors());
+const PORT = process.env.PORT || 5000;
 
 app.get("/reddit", async (req, res) => {
   try {
-    const redditRes = await fetch(
-      "https://www.reddit.com/r/reactjs.json?raw_json=1"
-    );
+    const redditRes = await fetch("https://www.reddit.com/r/reactjs.json", {
+      headers: { "User-Agent": "reddit-viewer-app/0.1" }
+    });
+
+    if (!redditRes.ok) {
+      throw new Error(`Reddit fetch failed with status: ${redditRes.status}`);
+    }
+
     const data = await redditRes.json();
     res.json(data);
-  } catch (err) { 
+  } catch (err) {
+    console.error(err);
     res.status(500).json({ error: "Failed to fetch Reddit posts" });
   }
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
