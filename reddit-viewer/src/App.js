@@ -6,31 +6,23 @@ export default function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    async function fetchPosts() {
-      try {
-        // Use AllOrigins to bypass CORS
-        const res = await fetch(
-          'https://api.allorigins.win/get?url=' +
-            encodeURIComponent('https://www.reddit.com/r/reactjs.json')
-        );
+  async function fetchPosts() {
+    try {
+      const res = await fetch("https://redditapp-ikuv.onrender.com/reddit");
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
 
-        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-
-        const textData = await res.json();
-        const data = JSON.parse(textData.contents);
-
-        // Map the posts
-        setPosts(data.data.children.map((p) => p.data));
-      } catch (err) {
-        console.error('Error fetching posts:', err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
+      const data = await res.json();
+      setPosts(data.data.children.map((p) => p.data));
+    } catch (err) {
+      console.error("Error fetching posts:", err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
+  }
+  fetchPosts();
+}, []);
 
-    fetchPosts();
-  }, []);
 
   return (
     <div
