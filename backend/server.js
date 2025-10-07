@@ -10,11 +10,9 @@ const PORT = process.env.PORT || 5000;
 app.get('/reddit', async (req, res) => {
   try {
     const redditRes = await fetch('https://www.reddit.com/r/reactjs.json', {
-      headers: {
-        'User-Agent': 'MyRedditApp/1.0', // Must be something custom
-      },
+      headers: { 'User-Agent': 'MyRedditApp/1.0' },
     });
-
+    if (!redditRes.ok) throw new Error(`Reddit fetch failed: ${redditRes.status}`);
     const data = await redditRes.json();
     res.json(data);
   } catch (err) {
@@ -23,6 +21,4 @@ app.get('/reddit', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
