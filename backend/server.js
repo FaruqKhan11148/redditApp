@@ -1,17 +1,18 @@
-import express from 'express';
-import fetch from 'node-fetch';
-import cors from 'cors';
+import express from "express";
+import fetch from "node-fetch";
+import cors from "cors";
 
 const app = express();
 app.use(cors());
 
 const PORT = process.env.PORT || 5000;
 
-app.get('/reddit', async (req, res) => {
+app.get("/reddit", async (req, res) => {
   try {
-    const redditRes = await fetch('https://www.reddit.com/r/reactjs.json', {
+    const redditRes = await fetch("https://www.reddit.com/r/reactjs.json", {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Node Server)',
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+        "Accept": "application/json",
       },
     });
 
@@ -20,15 +21,14 @@ app.get('/reddit', async (req, res) => {
     }
 
     const data = await redditRes.json();
-    res.setHeader('Access-Control-Allow-Origin', '*'); // ✅ fix CORS
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.json(data);
   } catch (err) {
-    console.error('Reddit fetch error:', err.message);
-    res.status(500).json({ error: 'Failed to fetch Reddit posts' });
+    console.error("Reddit fetch error:", err.message);
+    res.status(500).json({ error: "Failed to fetch Reddit posts" });
   }
 });
 
-
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });

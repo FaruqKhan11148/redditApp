@@ -6,23 +6,22 @@ export default function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-  async function fetchPosts() {
-    try {
-      const res = await fetch("https://redditapp-ikuv.onrender.com/reddit");
-      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+    async function fetchPosts() {
+      try {
+        const res = await fetch('https://redditapp-ikuv.onrender.com/reddit');
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
 
-      const data = await res.json();
-      setPosts(data.data.children.map((p) => p.data));
-    } catch (err) {
-      console.error("Error fetching posts:", err);
-      setError(err.message);
-    } finally {
-      setLoading(false);
+        const data = await res.json();
+        setPosts(data.data.children.map((p) => p.data));
+      } catch (err) {
+        console.error('Error fetching posts:', err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
     }
-  }
-  fetchPosts();
-}, []);
-
+    fetchPosts();
+  }, []);
 
   return (
     <div
@@ -59,7 +58,9 @@ export default function App() {
         </header>
 
         {loading && <div style={{ color: '#cbd5e1' }}>Loading posts...</div>}
-        {error && <div style={{ color: '#ffb4b4' }}>Error fetching posts: {error}</div>}
+        {error && (
+          <div style={{ color: '#ffb4b4' }}>Error fetching posts: {error}</div>
+        )}
 
         {!loading && !error && (
           <div
