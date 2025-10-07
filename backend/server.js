@@ -11,18 +11,14 @@ app.get('/reddit', async (req, res) => {
   try {
     const redditRes = await fetch('https://www.reddit.com/r/reactjs.json', {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; RedditViewer/1.0)',
+        'User-Agent': 'MyRedditApp/1.0', // Must be something custom
       },
     });
-
-    if (!redditRes.ok) {
-      throw new Error(`Reddit fetch failed with status: ${redditRes.status}`);
-    }
 
     const data = await redditRes.json();
     res.json(data);
   } catch (err) {
-    console.error(err);
+    console.error('Reddit fetch error:', err.message);
     res.status(500).json({ error: 'Failed to fetch Reddit posts' });
   }
 });
