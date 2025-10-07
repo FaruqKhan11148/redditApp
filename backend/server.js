@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 5000;
 
 app.get("/reddit", async (req, res) => {
   try {
-    const redditRes = await fetch("https://www.reddit.com/r/reactjs.json", {
+    const redditRes = await fetch("https://redditappbackend.onrender.com/reddit", {
       headers: {
         "User-Agent": "Mozilla/5.0 (compatible; RedditViewer/1.0)"
       }
