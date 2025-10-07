@@ -9,22 +9,21 @@ const PORT = process.env.PORT || 5000;
 
 app.get('/reddit', async (req, res) => {
   try {
-    // Use a CORS-friendly proxy to avoid 403 from Reddit
+    // Use AllOrigins proxy to bypass Reddit 403
     const redditRes = await fetch(
-      'https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.reddit.com/r/reactjs.json'),
+      'https://api.allorigins.win/get?url=' +
+        encodeURIComponent('https://www.reddit.com/r/reactjs.json'),
       {
         headers: {
-          'User-Agent': 'MyRedditApp/1.0',
+          'User-Agent': 'MyRedditApp/1.0', // Required header
         },
       }
     );
 
-    if (!redditRes.ok)
-      throw new Error(`Reddit fetch failed: ${redditRes.status}`);
+    if (!redditRes.ok) throw new Error(`Reddit fetch failed: ${redditRes.status}`);
 
     const textData = await redditRes.json();
-    // allorigins wraps the content in a 'contents' field
-    const data = JSON.parse(textData.contents);
+    const data = JSON.parse(textData.contents); // AllOrigins wraps in 'contents'
 
     res.json(data);
   } catch (err) {
