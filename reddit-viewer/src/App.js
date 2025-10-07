@@ -8,7 +8,7 @@ export default function App() {
   useEffect(() => {
   async function fetchPosts() {
     try {
-      const res = await fetch("https://www.reddit.com/r/reactjs.json");  
+      const res = await fetch("https://redditappbackend.onrender.com/reddit");
       if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
 
       const data = await res.json();
