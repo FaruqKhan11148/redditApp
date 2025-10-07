@@ -10,9 +10,14 @@ const PORT = process.env.PORT || 5000;
 app.get('/reddit', async (req, res) => {
   try {
     const redditRes = await fetch('https://www.reddit.com/r/reactjs.json', {
-      headers: { 'User-Agent': 'MyRedditApp/1.0' },
+      headers: {
+        'User-Agent':
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36',
+      },
     });
-    if (!redditRes.ok) throw new Error(`Reddit fetch failed: ${redditRes.status}`);
+
+    if (!redditRes.ok)
+      throw new Error(`Reddit fetch failed: ${redditRes.status}`);
     const data = await redditRes.json();
     res.json(data);
   } catch (err) {
