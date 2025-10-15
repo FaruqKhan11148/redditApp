@@ -1,4 +1,4 @@
-// this functions is for fetching data from given json url
+// fetching data
 import fetch from 'node-fetch';
 
 export default async function handler(req, res) {
