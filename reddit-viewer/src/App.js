@@ -1,3 +1,4 @@
+// component for main layout
 import React, { useEffect, useState } from 'react';
 
 export default function App() {
