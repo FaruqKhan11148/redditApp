@@ -1,4 +1,4 @@
-// fetching data
+// fetching data from given url
 import fetch from 'node-fetch';
 
 export default async function handler(req, res) {
@@ -7,9 +7,9 @@ export default async function handler(req, res) {
       'https://www.reddit.com/r/reactjs.json'
     );
 
-    if (!redditRes.ok) {
-      throw new Error(`Reddit fetch failed with status: ${redditRes.status}`);
-    }
+    // if (!redditRes.ok) {
+    //   throw new Error(`Reddit fetch failed with status: ${redditRes.status}`);
+    // }
 
     const data = await redditRes.json();
     res.status(200).json(data);
