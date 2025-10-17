@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 export default async function handler(req, res) {
   try {
     const redditRes = await fetch(
-      // 'https://www.reddit.com/r/reactjs.json'
+      'https://www.reddit.com/r/reactjs.json'
     );
 
     if (!redditRes.ok) {
