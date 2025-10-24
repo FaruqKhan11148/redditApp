@@ -18,7 +18,7 @@ export default function App() {
         console.error('Error fetching posts:', err);
         setError(err.message);
       } finally {
-        setLoading(false);
+        
       }
     }
     fetchPosts();
