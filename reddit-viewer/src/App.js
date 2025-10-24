@@ -10,7 +10,7 @@ export default function App() {
     async function fetchPosts() {
       try {
         const res = await fetch('https://redditapp-ikuv.onrender.com/reddit');
-        
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
 
         const data = await res.json();
         setPosts(data.data.children.map((p) => p.data));
