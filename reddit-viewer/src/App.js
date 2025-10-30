@@ -58,7 +58,7 @@ export default function App() {
             r/reactjs — top posts
           </h1>
         </header>
-
+        fetchPosts();
         {loading && <div style={{ color: '#cbd5e1' }}>Loading posts...</div>}
         {error && (
           <div style={{ color: '#ffb4b4' }}>Error fetching posts: {error}</div>
