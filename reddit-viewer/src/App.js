@@ -25,7 +25,16 @@ export default function App() {
   }, []);
 
   return (
-    
+    <div
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 20,
+        background: 'linear-gradient(180deg,#0f172a,#071025)',
+      }}
+    >
     
       <div
         style={{
