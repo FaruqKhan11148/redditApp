@@ -21,7 +21,7 @@ export default function App() {
         setLoading(false);
       }
     }
-    fetchPosts();
+    
   }, []);
 
   return (
