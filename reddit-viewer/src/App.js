@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 
 export default function App() {
-  const [posts, setPosts] = useState([]);
+ 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
