@@ -11,8 +11,8 @@ export default async function handler(req, res) {
       throw new Error(`Reddit fetch failed with status: ${redditRes.status}`);
     }
 
-    // const data = await redditRes.json();
-    // res.status(200).json(data);
+    const data = await redditRes.json();
+    res.status(200).json(data);
     
   } catch (err) {
     console.error('Reddit fetch error:', err.message);
